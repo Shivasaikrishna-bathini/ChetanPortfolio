@@ -252,50 +252,7 @@ export default function Home() {
               </p>
             </div>
             
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-64 h-64 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse-glow"></div>
-              </div>
-              
-              <div className="relative flex flex-wrap justify-center items-center gap-4 min-h-[400px]">
-                {techStack.map((tech, index) => {
-                  const angle = (index / techStack.length) * Math.PI * 2;
-                  const radius = 180;
-                  const x = Math.cos(angle) * radius;
-                  const y = Math.sin(angle) * radius;
-                  
-                  return (
-                    <div
-                      key={tech.label}
-                      className="absolute group animate-float"
-                      style={{
-                        transform: `translate(${x}px, ${y}px)`,
-                        animationDelay: `${index * 0.2}s`,
-                      }}
-                    >
-                      <div 
-                        className="relative hover-elevate active-elevate-2 cursor-pointer transition-all duration-300 hover:scale-125"
-                        data-testid={`card-tech-${tech.label.toLowerCase()}`}
-                        onClick={(e) => handleTechClick(e, tech.label)}
-                      >
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div className="relative bg-card/80 backdrop-blur-sm border border-border rounded-2xl p-4 min-w-[100px] text-center overflow-hidden">
-                          <div className="mb-2 flex justify-center">
-                            <div className="p-3 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 group-hover:animate-spin-slow transition-transform group-active:scale-90">
-                              <tech.icon className={`h-6 w-6 ${tech.color}`} />
-                            </div>
-                          </div>
-                          <h3 className="font-semibold text-xs mb-1">{tech.label}</h3>
-                          <p className="text-[10px] text-muted-foreground">{tech.category}</p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-            
-            <div className="flex flex-wrap justify-center gap-3 pt-8">
+            <div className="flex flex-wrap justify-center gap-3">
               {techStack.map((tech, index) => (
                 <div
                   key={tech.label}
