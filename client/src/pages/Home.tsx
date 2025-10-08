@@ -471,7 +471,7 @@ export default function Home() {
 
       <footer className="border-t border-border py-12">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             <div className="space-y-4">
               <h3 className="font-bold text-lg">Chetan Chhetri</h3>
               <p className="text-sm text-muted-foreground">
@@ -482,7 +482,6 @@ export default function Home() {
               <h4 className="font-semibold">Quick Links</h4>
               <div className="flex flex-col gap-2">
                 <a href="#projects" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Projects</a>
-                <a href="#github" className="text-sm text-muted-foreground hover:text-foreground transition-colors">GitHub</a>
                 <a href="#skills" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Skills</a>
               </div>
             </div>
@@ -493,21 +492,6 @@ export default function Home() {
                   cchhetri@my.bridgeport.edu
                 </a>
                 <p className="text-sm text-muted-foreground">Connecticut, USA</p>
-              </div>
-            </div>
-            <div className="space-y-4">
-              <h4 className="font-semibold">Social</h4>
-              <div className="flex gap-3">
-                <a href="https://github.com/Chetan-chhetri" target="_blank" rel="noopener noreferrer">
-                  <Button variant="ghost" size="icon">
-                    <Github className="h-4 w-4" />
-                  </Button>
-                </a>
-                <a href="https://linkedin.com/in/chetanchhetri" target="_blank" rel="noopener noreferrer">
-                  <Button variant="ghost" size="icon">
-                    <Linkedin className="h-4 w-4" />
-                  </Button>
-                </a>
               </div>
             </div>
           </div>
