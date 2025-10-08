@@ -150,6 +150,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
+      <SparklesComponent />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500/20 via-background to-background pointer-events-none"></div>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-yellow-500/20 via-background to-background pointer-events-none"></div>
       
@@ -206,7 +207,6 @@ export default function Home() {
 
       <section id="about" className="relative min-h-screen flex items-center overflow-hidden">
         <AnimatedBackground />
-        <SparklesComponent />
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 w-full relative z-10">
           <div className="space-y-12 text-center max-w-4xl mx-auto">
             <div className="space-y-6 animate-fade-in">
@@ -469,34 +469,16 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-border py-12">
+      <footer className="border-t border-border py-6">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="space-y-4">
-              <h3 className="font-bold text-lg">Chetan Chhetri</h3>
-              <p className="text-sm text-muted-foreground">
-                AI/ML Engineer & Full Stack Developer
-              </p>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="text-center md:text-left">
+              <p className="text-sm font-semibold">Chetan Chhetri</p>
+              <p className="text-xs text-muted-foreground">AI/ML Engineer & Full Stack Developer</p>
             </div>
-            <div className="space-y-4">
-              <h4 className="font-semibold">Quick Links</h4>
-              <div className="flex flex-col gap-2">
-                <a href="#projects" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Projects</a>
-                <a href="#skills" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Skills</a>
-              </div>
+            <div className="text-center text-xs text-muted-foreground">
+              <p>© 2024 Chetan Chhetri. All rights reserved.</p>
             </div>
-            <div className="space-y-4">
-              <h4 className="font-semibold">Contact</h4>
-              <div className="flex flex-col gap-2">
-                <a href="mailto:cchhetri@my.bridgeport.edu" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  cchhetri@my.bridgeport.edu
-                </a>
-                <p className="text-sm text-muted-foreground">Connecticut, USA</p>
-              </div>
-            </div>
-          </div>
-          <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            <p>© 2024 Chetan Chhetri. All rights reserved.</p>
           </div>
         </div>
       </footer>
