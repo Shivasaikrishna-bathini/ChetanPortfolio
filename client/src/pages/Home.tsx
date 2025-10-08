@@ -95,6 +95,20 @@ export default function Home() {
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleTechClick = (e: React.MouseEvent<HTMLDivElement>, techName: string) => {
+    const element = e.currentTarget;
+    element.classList.add('animate-bounce');
+    
+    const ripple = document.createElement('div');
+    ripple.className = 'absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 opacity-50 animate-ping';
+    element.appendChild(ripple);
+    
+    setTimeout(() => {
+      element.classList.remove('animate-bounce');
+      ripple.remove();
+    }, 1000);
+  };
+
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500/20 via-background to-background pointer-events-none"></div>
@@ -262,11 +276,12 @@ export default function Home() {
                       <div 
                         className="relative hover-elevate active-elevate-2 cursor-pointer transition-all duration-300 hover:scale-125"
                         data-testid={`card-tech-${tech.label.toLowerCase()}`}
+                        onClick={(e) => handleTechClick(e, tech.label)}
                       >
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div className="relative bg-card/80 backdrop-blur-sm border border-border rounded-2xl p-4 min-w-[100px] text-center">
+                        <div className="relative bg-card/80 backdrop-blur-sm border border-border rounded-2xl p-4 min-w-[100px] text-center overflow-hidden">
                           <div className="mb-2 flex justify-center">
-                            <div className="p-3 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 group-hover:animate-spin-slow">
+                            <div className="p-3 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 group-hover:animate-spin-slow transition-transform group-active:scale-90">
                               <tech.icon className={`h-6 w-6 ${tech.color}`} />
                             </div>
                           </div>
