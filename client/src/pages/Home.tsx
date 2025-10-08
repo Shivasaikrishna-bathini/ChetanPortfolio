@@ -21,7 +21,30 @@ import {
   Zap,
   Sparkles
 } from "lucide-react";
-import { SiPython, SiTensorflow, SiFastapi, SiAmazon, SiOpencv, SiPytorch, SiDocker, SiPostgresql } from "react-icons/si";
+import { 
+  SiPython, 
+  SiJavascript,
+  SiTypescript,
+  SiCplusplus,
+  SiTensorflow, 
+  SiPytorch, 
+  SiOpencv, 
+  SiScikitlearn,
+  SiKeras,
+  SiNumpy,
+  SiPandas,
+  SiFastapi,
+  SiFlask,
+  SiReact,
+  SiNodedotjs,
+  SiDocker, 
+  SiPostgresql,
+  SiMysql,
+  SiMongodb,
+  SiAmazon,
+  SiGit,
+  SiPostman
+} from "react-icons/si";
 
 const projects = [
   {
@@ -52,17 +75,31 @@ const projects = [
 
 const techStack = [
   { icon: SiPython, label: "Python", category: "Languages", color: "text-blue-400" },
+  { icon: SiJavascript, label: "JavaScript", category: "Languages", color: "text-yellow-400" },
+  { icon: SiTypescript, label: "TypeScript", category: "Languages", color: "text-blue-500" },
+  { icon: SiCplusplus, label: "C++", category: "Languages", color: "text-blue-600" },
   { icon: SiTensorflow, label: "TensorFlow", category: "AI/ML", color: "text-orange-400" },
-  { icon: Code, label: "LangChain", category: "AI/ML", color: "text-green-400" },
-  { icon: SiFastapi, label: "FastAPI", category: "Frameworks", color: "text-teal-400" },
-  { icon: Database, label: "ChromaDB", category: "Database", color: "text-purple-400" },
-  { icon: SiAmazon, label: "AWS", category: "Cloud", color: "text-yellow-500" },
   { icon: SiPytorch, label: "PyTorch", category: "AI/ML", color: "text-red-400" },
+  { icon: Code, label: "LangChain", category: "AI/ML", color: "text-green-400" },
+  { icon: SiScikitlearn, label: "Scikit-Learn", category: "AI/ML", color: "text-orange-500" },
+  { icon: SiKeras, label: "Keras", category: "AI/ML", color: "text-red-600" },
   { icon: SiOpencv, label: "OpenCV", category: "Computer Vision", color: "text-blue-500" },
-  { icon: SiDocker, label: "Docker", category: "DevOps", color: "text-blue-400" },
+  { icon: SiNumpy, label: "NumPy", category: "Data Science", color: "text-blue-300" },
+  { icon: SiPandas, label: "Pandas", category: "Data Science", color: "text-purple-400" },
+  { icon: SiFastapi, label: "FastAPI", category: "Frameworks", color: "text-teal-400" },
+  { icon: SiFlask, label: "Flask", category: "Backend", color: "text-gray-400" },
+  { icon: SiReact, label: "React", category: "Frontend", color: "text-blue-400" },
+  { icon: SiNodedotjs, label: "Node.js", category: "Backend", color: "text-green-600" },
+  { icon: Database, label: "ChromaDB", category: "Database", color: "text-purple-400" },
   { icon: SiPostgresql, label: "PostgreSQL", category: "Database", color: "text-blue-600" },
-  { icon: Cpu, label: "VHDL", category: "Hardware", color: "text-indigo-400" },
-  { icon: Cloud, label: "EC2/S3", category: "Cloud", color: "text-orange-500" }
+  { icon: SiMysql, label: "MySQL", category: "Database", color: "text-blue-500" },
+  { icon: SiMongodb, label: "MongoDB", category: "Database", color: "text-green-500" },
+  { icon: SiAmazon, label: "AWS", category: "Cloud", color: "text-yellow-500" },
+  { icon: Cloud, label: "EC2/S3", category: "Cloud", color: "text-orange-500" },
+  { icon: SiDocker, label: "Docker", category: "DevOps", color: "text-blue-400" },
+  { icon: SiGit, label: "Git", category: "Tools", color: "text-orange-500" },
+  { icon: SiPostman, label: "Postman", category: "Tools", color: "text-orange-600" },
+  { icon: Cpu, label: "VHDL", category: "Hardware", color: "text-indigo-400" }
 ];
 
 
@@ -339,6 +376,90 @@ export default function Home() {
                   <Badge variant="secondary" className="hover:scale-105 transition-transform cursor-pointer">VSD Physical Design Flow</Badge>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 lg:py-32 relative z-10">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <h2 className="text-5xl font-bold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                Let's Connect
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 pt-8">
+              <Card className="p-8 hover-elevate transition-all hover:scale-105" data-testid="card-contact-email">
+                <div className="space-y-4">
+                  <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-blue-500/20 to-primary/20 flex items-center justify-center">
+                    <Mail className="h-8 w-8 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">Email</h3>
+                    <a 
+                      href="mailto:cchhetri@my.bridgeport.edu" 
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                      data-testid="link-email"
+                    >
+                      cchhetri@my.bridgeport.edu
+                    </a>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-8 hover-elevate transition-all hover:scale-105" data-testid="card-contact-github">
+                <div className="space-y-4">
+                  <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/20 to-primary/20 flex items-center justify-center">
+                    <Github className="h-8 w-8 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">GitHub</h3>
+                    <a 
+                      href="https://github.com/Chetan-chhetri" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                      data-testid="link-github"
+                    >
+                      @Chetan-chhetri
+                    </a>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-8 hover-elevate transition-all hover:scale-105" data-testid="card-contact-linkedin">
+                <div className="space-y-4">
+                  <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-yellow-500/20 to-accent/20 flex items-center justify-center">
+                    <Linkedin className="h-8 w-8 text-accent" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">LinkedIn</h3>
+                    <a 
+                      href="https://linkedin.com/in/chetanchhetri" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                      data-testid="link-linkedin"
+                    >
+                      Chetan Chhetri
+                    </a>
+                  </div>
+                </div>
+              </Card>
+            </div>
+
+            <div className="pt-8">
+              <a href="mailto:cchhetri@my.bridgeport.edu">
+                <Button size="lg" className="gap-2" data-testid="button-send-message">
+                  <Mail className="h-4 w-4" />
+                  Send me a message
+                </Button>
+              </a>
             </div>
           </div>
         </div>
