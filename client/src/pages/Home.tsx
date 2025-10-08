@@ -1,11 +1,8 @@
-import { useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ProjectCard } from "@/components/ProjectCard";
-import { FilterTabs } from "@/components/FilterTabs";
-import { GitHubRepoCard } from "@/components/GitHubRepoCard";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { 
   ArrowRight, 
@@ -20,13 +17,11 @@ import {
   FileText,
   Award,
   Briefcase,
-  GraduationCap
+  GraduationCap,
+  Zap,
+  Sparkles
 } from "lucide-react";
-import { SiPython, SiTensorflow, SiFastapi, SiAmazon, SiOpencv } from "react-icons/si";
-import heroImage from "@assets/generated_images/AI_neural_network_hero_image_16561568.png";
-import motionDetectorImage from "@assets/generated_images/Motion_Detector_AI_project_319c4ec7.png";
-import legalAssistantImage from "@assets/generated_images/Personal_Attorney_RAG_assistant_f02b6336.png";
-import pillDetectionImage from "@assets/generated_images/SmartMed_AI_pill_detection_b3d1497a.png";
+import { SiPython, SiTensorflow, SiFastapi, SiAmazon, SiOpencv, SiPytorch, SiDocker, SiPostgresql } from "react-icons/si";
 
 const projects = [
   {
@@ -34,7 +29,7 @@ const projects = [
     title: "Motion Detector – Agentic AI System",
     description: "AI system leveraging Bongard-HOI model to detect human-object interactions in videos and images. Integrated DeepSeek R1 for reasoning and LangChain agents.",
     category: "AI/ML",
-    image: motionDetectorImage,
+    image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=800&q=80",
     techStack: ["LangChain", "RAG", "FastAPI", "ChromaDB", "PyTorch", "HuggingFace", "OpenAI"]
   },
   {
@@ -42,7 +37,7 @@ const projects = [
     title: "Personal Attorney – Legal RAG Assistant",
     description: "LLM-based RAG System for personalized legal guidance. Vectorized user data and regulations using ChromaDB, served through FastAPI.",
     category: "AI/ML",
-    image: legalAssistantImage,
+    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80",
     techStack: ["LangChain", "FastAPI", "REST API", "ChromaDB", "DeepSeek", "AWS"]
   },
   {
@@ -50,50 +45,26 @@ const projects = [
     title: "SmartMed AI – Pill Detection App",
     description: "YOLO-based real-time medicine classification tool. Developed pill counting application for pharmacies with real-time video stream detection.",
     category: "Computer Vision",
-    image: pillDetectionImage,
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
     techStack: ["YOLO", "OpenCV", "Python", "FastAPI", "Google Colab", "AWS"]
   }
 ];
 
-const categories = ["All", "AI/ML", "Computer Vision", "Web Dev", "VLSI"];
-
 const techStack = [
-  { icon: SiPython, label: "Python", category: "Languages" },
-  { icon: Brain, label: "TensorFlow", category: "AI/ML" },
-  { icon: Code, label: "LangChain", category: "AI/ML" },
-  { icon: SiFastapi, label: "FastAPI", category: "Frameworks" },
-  { icon: Database, label: "ChromaDB", category: "Database" },
-  { icon: SiAmazon, label: "AWS", category: "Cloud" },
-  { icon: SiOpencv, label: "YOLO", category: "AI/ML" },
-  { icon: Cpu, label: "VHDL", category: "Hardware" }
+  { icon: SiPython, label: "Python", category: "Languages", color: "text-blue-400" },
+  { icon: SiTensorflow, label: "TensorFlow", category: "AI/ML", color: "text-orange-400" },
+  { icon: Code, label: "LangChain", category: "AI/ML", color: "text-green-400" },
+  { icon: SiFastapi, label: "FastAPI", category: "Frameworks", color: "text-teal-400" },
+  { icon: Database, label: "ChromaDB", category: "Database", color: "text-purple-400" },
+  { icon: SiAmazon, label: "AWS", category: "Cloud", color: "text-yellow-500" },
+  { icon: SiPytorch, label: "PyTorch", category: "AI/ML", color: "text-red-400" },
+  { icon: SiOpencv, label: "OpenCV", category: "Computer Vision", color: "text-blue-500" },
+  { icon: SiDocker, label: "Docker", category: "DevOps", color: "text-blue-400" },
+  { icon: SiPostgresql, label: "PostgreSQL", category: "Database", color: "text-blue-600" },
+  { icon: Cpu, label: "VHDL", category: "Hardware", color: "text-indigo-400" },
+  { icon: Cloud, label: "EC2/S3", category: "Cloud", color: "text-orange-500" }
 ];
 
-const githubRepos = [
-  {
-    name: "motion-detector-ai",
-    description: "Agentic AI system for human-object interaction detection using Bongard-HOI model and DeepSeek reasoning",
-    stars: 124,
-    forks: 23,
-    language: "Python",
-    url: "https://github.com/Chetan-chhetri"
-  },
-  {
-    name: "legal-rag-assistant",
-    description: "RAG-based legal assistant providing personalized guidance using local regulations and ChromaDB vectorization",
-    stars: 89,
-    forks: 15,
-    language: "Python",
-    url: "https://github.com/Chetan-chhetri"
-  },
-  {
-    name: "smartmed-pill-detection",
-    description: "Real-time pill counting application using YOLO for pharmacy automation deployed on AWS",
-    stars: 67,
-    forks: 12,
-    language: "Python",
-    url: "https://github.com/Chetan-chhetri"
-  }
-];
 
 const experience = [
   {
@@ -119,14 +90,17 @@ const experience = [
 ];
 
 export default function Home() {
-  const [activeCategory, setActiveCategory] = useState("All");
-  
-  const filteredProjects = activeCategory === "All" 
-    ? projects 
-    : projects.filter(p => p.category === activeCategory);
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-background to-yellow-500/10 pointer-events-none"></div>
+      <div className="absolute top-20 -left-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
+      <div className="absolute bottom-20 -right-20 w-96 h-96 bg-yellow-500/20 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDelay: '1s' }}></div>
+      
       <header className="sticky top-0 z-50 border-b border-border backdrop-blur-xl bg-background/80">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -135,163 +109,146 @@ export default function Home() {
                 Chetan Chhetri
               </span>
             </div>
-            <nav className="hidden md:flex items-center gap-8">
-              <a href="#projects" className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-projects">
+            <nav className="hidden md:flex items-center gap-2">
+              <Button 
+                variant="ghost" 
+                className="rounded-full hover-elevate" 
+                onClick={() => scrollToSection('about')}
+                data-testid="button-nav-about"
+              >
+                About
+              </Button>
+              <Button 
+                variant="ghost" 
+                className="rounded-full hover-elevate" 
+                onClick={() => scrollToSection('projects')}
+                data-testid="button-nav-projects"
+              >
                 Projects
-              </a>
-              <a href="#github" className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-github">
-                GitHub
-              </a>
-              <a href="#skills" className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-skills">
+              </Button>
+              <Button 
+                variant="ghost" 
+                className="rounded-full hover-elevate" 
+                onClick={() => scrollToSection('skills')}
+                data-testid="button-nav-skills"
+              >
                 Skills
-              </a>
-              <Link href="/style-guide">
-                <a className="text-sm font-medium hover:text-primary transition-colors" data-testid="link-nav-styleguide">
-                  Style Guide
-                </a>
-              </Link>
+              </Button>
+              <Button 
+                variant="ghost" 
+                className="rounded-full hover-elevate" 
+                onClick={() => window.open('/Chetan_Chhetri_Resume.pdf', '_blank')}
+                data-testid="button-nav-resume"
+              >
+                Resume
+              </Button>
             </nav>
             <ThemeToggle />
           </div>
         </div>
       </header>
 
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 w-full">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <h1 className="text-5xl lg:text-6xl font-bold tracking-tight">
-                  <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                    AI/ML Engineer
-                  </span>
-                  <br />
-                  <span>Full Stack Developer</span>
-                </h1>
-                <p className="text-xl text-muted-foreground max-w-xl">
-                  Computer Engineering graduate specializing in AI/ML, RAG systems, computer vision, and cloud deployment. 
-                  Experienced in LangChain, TensorFlow, YOLO, and AWS.
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="gap-2" data-testid="button-view-projects">
-                  <a href="#projects" className="flex items-center gap-2">
-                    View Projects
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
-                </Button>
-                <Button size="lg" variant="outline" className="gap-2" data-testid="button-contact">
-                  <Mail className="h-4 w-4" />
-                  Contact Me
-                </Button>
-              </div>
-              <div className="flex items-center gap-4">
-                <a href="https://github.com/Chetan-chhetri" target="_blank" rel="noopener noreferrer" data-testid="link-github">
-                  <Button variant="ghost" size="icon">
-                    <Github className="h-5 w-5" />
-                  </Button>
-                </a>
-                <a href="https://linkedin.com/in/chetanchhetri" target="_blank" rel="noopener noreferrer" data-testid="link-linkedin">
-                  <Button variant="ghost" size="icon">
-                    <Linkedin className="h-5 w-5" />
-                  </Button>
-                </a>
-                <a href="mailto:cchhetri@my.bridgeport.edu" data-testid="link-email">
-                  <Button variant="ghost" size="icon">
-                    <Mail className="h-5 w-5" />
-                  </Button>
-                </a>
-              </div>
+      <section id="about" className="relative min-h-screen flex items-center overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 w-full relative z-10">
+          <div className="space-y-12 text-center max-w-4xl mx-auto">
+            <div className="space-y-6 animate-fade-in">
+              <h1 className="text-6xl lg:text-7xl font-bold tracking-tight">
+                <span className="bg-gradient-to-r from-blue-500 via-primary to-yellow-500 bg-clip-text text-transparent animate-gradient">
+                  AI/ML Engineer
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  Full Stack Developer
+                </span>
+              </h1>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Computer Engineering graduate specializing in AI/ML, RAG systems, computer vision, and cloud deployment. 
+                Experienced in LangChain, TensorFlow, YOLO, and AWS.
+              </p>
             </div>
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 blur-3xl"></div>
-              <img
-                src={heroImage}
-                alt="AI Neural Network Visualization"
-                className="relative rounded-lg shadow-2xl"
-              />
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button size="lg" className="gap-2 hover:scale-105 transition-transform" onClick={() => scrollToSection('projects')} data-testid="button-view-projects">
+                View Projects
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+              <Button size="lg" variant="outline" className="gap-2 hover:scale-105 transition-transform" data-testid="button-contact">
+                <Mail className="h-4 w-4" />
+                Contact Me
+              </Button>
+            </div>
+            <div className="flex justify-center items-center gap-4">
+              <a href="https://github.com/Chetan-chhetri" target="_blank" rel="noopener noreferrer" data-testid="link-github">
+                <Button variant="ghost" size="icon" className="hover:scale-110 transition-transform">
+                  <Github className="h-5 w-5" />
+                </Button>
+              </a>
+              <a href="https://linkedin.com/in/chetanchhetri" target="_blank" rel="noopener noreferrer" data-testid="link-linkedin">
+                <Button variant="ghost" size="icon" className="hover:scale-110 transition-transform">
+                  <Linkedin className="h-5 w-5" />
+                </Button>
+              </a>
+              <a href="mailto:cchhetri@my.bridgeport.edu" data-testid="link-email">
+                <Button variant="ghost" size="icon" className="hover:scale-110 transition-transform">
+                  <Mail className="h-5 w-5" />
+                </Button>
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="projects" className="py-20 lg:py-32">
+      <section id="projects" className="py-20 lg:py-32 relative z-10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h2 className="text-4xl font-bold tracking-tight">Featured Projects</h2>
-              <p className="text-lg text-muted-foreground">
+          <div className="space-y-12">
+            <div className="space-y-4 text-center">
+              <h2 className="text-5xl font-bold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                Featured Projects
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Explore my work in AI/ML, computer vision, and full-stack development
               </p>
             </div>
-            <FilterTabs
-              categories={categories}
-              activeCategory={activeCategory}
-              onCategoryChange={setActiveCategory}
-            />
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProjects.map((project) => (
-                <ProjectCard key={project.id} {...project} />
+              {projects.map((project, index) => (
+                <div 
+                  key={project.id} 
+                  className="animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <ProjectCard {...project} />
+                </div>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section id="github" className="py-20 lg:py-32 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h2 className="text-4xl font-bold tracking-tight">GitHub Activity</h2>
-              <p className="text-lg text-muted-foreground">
-                Recent repositories and contributions
-              </p>
-            </div>
-            <div className="grid lg:grid-cols-2 gap-6">
-              <div className="space-y-6">
-                <h3 className="text-xl font-semibold">Pinned Repositories</h3>
-                {githubRepos.map((repo) => (
-                  <GitHubRepoCard key={repo.name} {...repo} />
-                ))}
-              </div>
-              <div className="space-y-6">
-                <h3 className="text-xl font-semibold">Contribution Graph</h3>
-                <Card className="p-6" data-testid="card-github-contribution">
-                  <div className="space-y-4">
-                    <p className="text-sm text-muted-foreground">
-                      GitHub contribution data will be loaded from the public API
-                    </p>
-                    <div className="h-32 rounded bg-muted flex items-center justify-center">
-                      <p className="text-sm text-muted-foreground">Contribution graph placeholder</p>
-                    </div>
-                  </div>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="skills" className="py-20 lg:py-32">
+      <section id="skills" className="py-20 lg:py-32 relative z-10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="space-y-12">
-            <div className="space-y-4">
-              <h2 className="text-4xl font-bold tracking-tight">Skills & Technologies</h2>
-              <p className="text-lg text-muted-foreground">
-                Core competencies and tech stack
+            <div className="space-y-4 text-center">
+              <h2 className="text-5xl font-bold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                Skills & Technologies
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Expertise across AI/ML, cloud platforms, and modern development tools
               </p>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {techStack.map((tech) => (
-                <Card key={tech.label} className="p-6 hover-elevate transition-all" data-testid={`card-tech-${tech.label.toLowerCase()}`}>
-                  <div className="space-y-4">
-                    <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <tech.icon className="h-6 w-6 text-primary" />
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {techStack.map((tech, index) => (
+                <Card 
+                  key={tech.label} 
+                  className="group p-6 hover-elevate active-elevate-2 transition-all duration-300 hover:scale-105 cursor-pointer animate-fade-in-up border-2 border-transparent hover:border-primary/20" 
+                  data-testid={`card-tech-${tech.label.toLowerCase()}`}
+                  style={{ animationDelay: `${index * 0.05}s` }}
+                >
+                  <div className="space-y-4 text-center">
+                    <div className="mx-auto h-16 w-16 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <tech.icon className={`h-8 w-8 ${tech.color}`} />
                     </div>
                     <div>
-                      <h3 className="font-semibold">{tech.label}</h3>
-                      <p className="text-sm text-muted-foreground">{tech.category}</p>
+                      <h3 className="font-semibold text-sm">{tech.label}</h3>
+                      <p className="text-xs text-muted-foreground">{tech.category}</p>
                     </div>
                   </div>
                 </Card>
@@ -301,16 +258,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-32 bg-muted/30">
+      <section className="py-20 lg:py-32 relative z-10 bg-muted/20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
             <div className="space-y-8">
               <div className="flex items-center gap-3">
-                <Briefcase className="h-8 w-8 text-primary" />
+                <div className="p-3 rounded-lg bg-gradient-to-br from-blue-500/20 to-primary/20">
+                  <Briefcase className="h-6 w-6 text-primary" />
+                </div>
                 <h2 className="text-3xl font-bold">Experience</h2>
               </div>
               {experience.map((exp, idx) => (
-                <Card key={idx} className="p-6" data-testid={`card-experience-${idx}`}>
+                <Card key={idx} className="p-6 hover-elevate transition-all hover:scale-105" data-testid={`card-experience-${idx}`}>
                   <div className="space-y-4">
                     <div>
                       <h3 className="font-semibold text-lg">{exp.role}</h3>
@@ -320,7 +279,7 @@ export default function Home() {
                     <ul className="space-y-2">
                       {exp.highlights.map((highlight, i) => (
                         <li key={i} className="text-sm text-muted-foreground flex gap-2">
-                          <span className="text-primary">•</span>
+                          <Sparkles className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
                           {highlight}
                         </li>
                       ))}
@@ -331,10 +290,12 @@ export default function Home() {
             </div>
             <div className="space-y-8">
               <div className="flex items-center gap-3">
-                <GraduationCap className="h-8 w-8 text-primary" />
+                <div className="p-3 rounded-lg bg-gradient-to-br from-yellow-500/20 to-accent/20">
+                  <GraduationCap className="h-6 w-6 text-accent" />
+                </div>
                 <h2 className="text-3xl font-bold">Education</h2>
               </div>
-              <Card className="p-6" data-testid="card-education-msc">
+              <Card className="p-6 hover-elevate transition-all hover:scale-105" data-testid="card-education-msc">
                 <div className="space-y-2">
                   <h3 className="font-semibold text-lg">MSc Computer Engineering</h3>
                   <p className="text-muted-foreground">University of Bridgeport</p>
@@ -344,7 +305,7 @@ export default function Home() {
                   </div>
                 </div>
               </Card>
-              <Card className="p-6" data-testid="card-education-btech">
+              <Card className="p-6 hover-elevate transition-all hover:scale-105" data-testid="card-education-btech">
                 <div className="space-y-2">
                   <h3 className="font-semibold text-lg">BTech</h3>
                   <p className="text-muted-foreground">JNTUH</p>
@@ -356,13 +317,15 @@ export default function Home() {
               </Card>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <Award className="h-6 w-6 text-primary" />
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20">
+                    <Award className="h-5 w-5 text-accent" />
+                  </div>
                   <h3 className="text-xl font-semibold">Certifications</h3>
                 </div>
-                <div className="space-y-2">
-                  <Badge variant="secondary" className="text-xs">Game Development with Spring Boot</Badge>
-                  <Badge variant="secondary" className="text-xs">Complete Networking Fundamentals (CCNA)</Badge>
-                  <Badge variant="secondary" className="text-xs">VSD Physical Design Flow</Badge>
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="secondary" className="hover:scale-105 transition-transform cursor-pointer">Game Development with Spring Boot</Badge>
+                  <Badge variant="secondary" className="hover:scale-105 transition-transform cursor-pointer">Networking Fundamentals (CCNA)</Badge>
+                  <Badge variant="secondary" className="hover:scale-105 transition-transform cursor-pointer">VSD Physical Design Flow</Badge>
                 </div>
               </div>
             </div>

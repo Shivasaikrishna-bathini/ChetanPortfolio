@@ -3,18 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
-import { CodeBlock } from "@/components/CodeBlock";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { ArrowLeft, Search, Pencil, Code, CheckCircle, ExternalLink } from "lucide-react";
-import motionDetectorImage from "@assets/generated_images/Motion_Detector_AI_project_319c4ec7.png";
-import legalAssistantImage from "@assets/generated_images/Personal_Attorney_RAG_assistant_f02b6336.png";
-import pillDetectionImage from "@assets/generated_images/SmartMed_AI_pill_detection_b3d1497a.png";
+import { ArrowLeft, Search, Pencil, Code, CheckCircle } from "lucide-react";
 
 const projectData: Record<string, any> = {
   "motion-detector": {
     title: "Motion Detector – Agentic AI System",
     subtitle: "Bongard-HOI Reasoning & Visual Scene Interpretation using LLMs",
-    image: motionDetectorImage,
+    image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=800&q=80",
     category: "AI/ML",
     techStack: ["LangChain", "RAG", "FastAPI", "ChromaDB", "PyTorch", "HuggingFace Transformers", "OpenAI"],
     problem: "Traditional computer vision systems struggle with complex human-object interaction detection in dynamic video environments. The challenge was to create an intelligent system that could not only detect interactions but reason about them contextually.",
@@ -47,7 +43,7 @@ print(f"Detected {len(results)} interactions")`
   "personal-attorney": {
     title: "Personal Attorney – Legal RAG Assistant",
     subtitle: "LLM-based RAG System for Personalized Legal Guidance",
-    image: legalAssistantImage,
+    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80",
     category: "AI/ML",
     techStack: ["LangChain", "FastAPI", "REST API", "ChromaDB", "DeepSeek", "AWS"],
     problem: "Access to personalized legal guidance is expensive and time-consuming. Users need quick answers to legal questions based on their specific jurisdiction and circumstances.",
@@ -81,7 +77,7 @@ async def get_legal_advice(query: str, jurisdiction: str):
   "smartmed-ai": {
     title: "SmartMed AI – Pill Detection App",
     subtitle: "YOLO-based Real-Time Medicine Classification Tool",
-    image: pillDetectionImage,
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
     category: "Computer Vision",
     techStack: ["YOLO", "OpenCV", "Python", "FastAPI", "Google Colab", "AWS"],
     problem: "Manual pill counting in pharmacies is error-prone and time-consuming. Pharmacies need an automated solution for accurate medicine identification and counting.",
@@ -222,44 +218,7 @@ export default function ProjectDetail() {
             </Card>
           </div>
 
-          <div className="space-y-6">
-            <h2 className="text-3xl font-bold">Code Example</h2>
-            <CodeBlock
-              code={project.code}
-              language="python"
-              title="main.py"
-            />
-          </div>
-
-          <div className="space-y-6">
-            <h2 className="text-3xl font-bold">Interactive Prototype</h2>
-            <Card className="overflow-hidden" data-testid="card-figma-embed">
-              <div className="aspect-video bg-muted flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <p className="text-muted-foreground">Figma Prototype Embed</p>
-                  <Button variant="outline" className="gap-2" data-testid="button-view-figma">
-                    <ExternalLink className="h-4 w-4" />
-                    View in Figma
-                  </Button>
-                </div>
-              </div>
-            </Card>
-          </div>
-
-          <div className="space-y-6 pb-20">
-            <h2 className="text-3xl font-bold">Live Demo</h2>
-            <Card className="overflow-hidden" data-testid="card-demo-embed">
-              <div className="aspect-video bg-muted flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <p className="text-muted-foreground">Interactive Demo Embed</p>
-                  <Button variant="default" className="gap-2" data-testid="button-open-demo">
-                    <ExternalLink className="h-4 w-4" />
-                    Open Demo
-                  </Button>
-                </div>
-              </div>
-            </Card>
-          </div>
+          <div className="pb-20"></div>
         </div>
       </div>
     </div>
