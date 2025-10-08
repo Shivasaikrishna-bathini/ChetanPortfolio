@@ -292,17 +292,6 @@ export default function Home() {
                     </div>
                   );
                 })}
-                
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center z-10">
-                    <div className="mb-4 p-6 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 backdrop-blur-sm animate-pulse-glow">
-                      <Sparkles className="h-12 w-12 text-primary" />
-                    </div>
-                    <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-500 via-primary to-yellow-500 bg-clip-text text-transparent">
-                      Tech Stack
-                    </h3>
-                  </div>
-                </div>
               </div>
             </div>
             

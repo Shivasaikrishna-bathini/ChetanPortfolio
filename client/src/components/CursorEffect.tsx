@@ -3,17 +3,10 @@ import { useEffect, useState } from 'react';
 export function CursorEffect() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isClicking, setIsClicking] = useState(false);
-  const [trails, setTrails] = useState<Array<{ x: number; y: number; id: number }>>([]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
-      
-      setTrails(prev => {
-        const newTrail = { x: e.clientX, y: e.clientY, id: Date.now() };
-        const updated = [newTrail, ...prev].slice(0, 10);
-        return updated;
-      });
     };
 
     const handleMouseDown = () => setIsClicking(true);
@@ -32,19 +25,6 @@ export function CursorEffect() {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[9999]">
-      {trails.map((trail, index) => (
-        <div
-          key={trail.id}
-          className="absolute w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"
-          style={{
-            left: trail.x - 16,
-            top: trail.y - 16,
-            opacity: 0.3 - index * 0.03,
-            transform: `scale(${1 - index * 0.1})`,
-            transition: 'all 0.3s ease-out',
-          }}
-        />
-      ))}
       
       <div
         className="absolute transition-all duration-100 ease-out"
