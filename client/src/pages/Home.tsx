@@ -4,6 +4,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { AnimatedBackground } from "@/components/AnimatedBackground";
+import { Sparkles as SparklesComponent } from "@/components/Sparkles";
 import { 
   ArrowRight, 
   Brain, 
@@ -203,6 +205,8 @@ export default function Home() {
       </header>
 
       <section id="about" className="relative min-h-screen flex items-center overflow-hidden">
+        <AnimatedBackground />
+        <SparklesComponent />
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 w-full relative z-10">
           <div className="space-y-12 text-center max-w-4xl mx-auto">
             <div className="space-y-6 animate-fade-in">
