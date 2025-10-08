@@ -97,9 +97,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-background to-yellow-500/10 pointer-events-none"></div>
-      <div className="absolute top-20 -left-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
-      <div className="absolute bottom-20 -right-20 w-96 h-96 bg-yellow-500/20 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500/20 via-background to-background pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-yellow-500/20 via-background to-background pointer-events-none"></div>
+      
+      <div className="absolute top-20 -left-20 w-[500px] h-[500px] bg-blue-500/30 rounded-full blur-3xl animate-pulse-glow animate-blob pointer-events-none"></div>
+      <div className="absolute bottom-20 -right-20 w-[500px] h-[500px] bg-yellow-500/30 rounded-full blur-3xl animate-pulse-glow animate-blob pointer-events-none" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/20 rounded-full blur-3xl animate-pulse-glow animate-blob pointer-events-none" style={{ animationDelay: '2s' }}></div>
       
       <header className="sticky top-0 z-50 border-b border-border backdrop-blur-xl bg-background/80">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -234,24 +237,71 @@ export default function Home() {
                 Expertise across AI/ML, cloud platforms, and modern development tools
               </p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {techStack.map((tech, index) => (
-                <Card 
-                  key={tech.label} 
-                  className="group p-6 hover-elevate active-elevate-2 transition-all duration-300 hover:scale-105 cursor-pointer animate-fade-in-up border-2 border-transparent hover:border-primary/20" 
-                  data-testid={`card-tech-${tech.label.toLowerCase()}`}
-                  style={{ animationDelay: `${index * 0.05}s` }}
-                >
-                  <div className="space-y-4 text-center">
-                    <div className="mx-auto h-16 w-16 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <tech.icon className={`h-8 w-8 ${tech.color}`} />
+            
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-64 h-64 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse-glow"></div>
+              </div>
+              
+              <div className="relative flex flex-wrap justify-center items-center gap-4 min-h-[400px]">
+                {techStack.map((tech, index) => {
+                  const angle = (index / techStack.length) * Math.PI * 2;
+                  const radius = 180;
+                  const x = Math.cos(angle) * radius;
+                  const y = Math.sin(angle) * radius;
+                  
+                  return (
+                    <div
+                      key={tech.label}
+                      className="absolute group animate-float"
+                      style={{
+                        transform: `translate(${x}px, ${y}px)`,
+                        animationDelay: `${index * 0.2}s`,
+                      }}
+                    >
+                      <div 
+                        className="relative hover-elevate active-elevate-2 cursor-pointer transition-all duration-300 hover:scale-125"
+                        data-testid={`card-tech-${tech.label.toLowerCase()}`}
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div className="relative bg-card/80 backdrop-blur-sm border border-border rounded-2xl p-4 min-w-[100px] text-center">
+                          <div className="mb-2 flex justify-center">
+                            <div className="p-3 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 group-hover:animate-spin-slow">
+                              <tech.icon className={`h-6 w-6 ${tech.color}`} />
+                            </div>
+                          </div>
+                          <h3 className="font-semibold text-xs mb-1">{tech.label}</h3>
+                          <p className="text-[10px] text-muted-foreground">{tech.category}</p>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-sm">{tech.label}</h3>
-                      <p className="text-xs text-muted-foreground">{tech.category}</p>
+                  );
+                })}
+                
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center z-10">
+                    <div className="mb-4 p-6 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 backdrop-blur-sm animate-pulse-glow">
+                      <Sparkles className="h-12 w-12 text-primary" />
                     </div>
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-500 via-primary to-yellow-500 bg-clip-text text-transparent">
+                      Tech Stack
+                    </h3>
                   </div>
-                </Card>
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex flex-wrap justify-center gap-3 pt-8">
+              {techStack.map((tech, index) => (
+                <div
+                  key={tech.label}
+                  className="group flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 backdrop-blur-sm border border-border hover-elevate transition-all duration-300 hover:scale-105 cursor-pointer animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.05}s` }}
+                  data-testid={`badge-tech-${tech.label.toLowerCase()}`}
+                >
+                  <tech.icon className={`h-4 w-4 ${tech.color} group-hover:scale-110 transition-transform`} />
+                  <span className="text-sm font-medium">{tech.label}</span>
+                </div>
               ))}
             </div>
           </div>
