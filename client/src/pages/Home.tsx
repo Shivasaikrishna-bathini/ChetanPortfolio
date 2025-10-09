@@ -220,12 +220,9 @@ export default function Home() {
           <div className="space-y-12 text-center max-w-5xl mx-auto">
             <div className="space-y-8 animate-fade-in">
               <div className="space-y-4">
-                <h1 className="text-7xl lg:text-8xl xl:text-9xl font-black tracking-tight leading-none">
-                  <span className="block bg-gradient-to-r from-blue-500 via-purple-500 to-yellow-500 bg-clip-text text-transparent animate-gradient">
-                    CHETAN
-                  </span>
-                  <span className="block bg-gradient-to-r from-yellow-500 via-primary to-blue-500 bg-clip-text text-transparent animate-gradient" style={{ animationDelay: '0.5s' }}>
-                    CHHETRI
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-none">
+                  <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-yellow-500 bg-clip-text text-transparent animate-gradient">
+                    CHETAN CHHETRI
                   </span>
                 </h1>
               </div>
