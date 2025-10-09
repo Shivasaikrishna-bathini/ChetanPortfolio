@@ -48,6 +48,8 @@ import {
   SiPostman
 } from "react-icons/si";
 
+// TODO: UPDATE PROJECT DETAILS BELOW
+// Update project titles, descriptions, images, tech stacks, and add GitHub/live links
 const projects = [
   {
     id: "motion-detector",
@@ -56,6 +58,8 @@ const projects = [
     category: "AI/ML",
     image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=800&q=80",
     techStack: ["LangChain", "RAG", "FastAPI", "ChromaDB", "PyTorch", "HuggingFace", "OpenAI"]
+    // TODO: Add githubUrl: "https://github.com/yourusername/project-repo"
+    // TODO: Add liveUrl: "https://your-project-demo.com" (if applicable)
   },
   {
     id: "personal-attorney",
@@ -64,6 +68,8 @@ const projects = [
     category: "AI/ML",
     image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80",
     techStack: ["LangChain", "FastAPI", "REST API", "ChromaDB", "DeepSeek", "AWS"]
+    // TODO: Add githubUrl: "https://github.com/yourusername/project-repo"
+    // TODO: Add liveUrl: "https://your-project-demo.com" (if applicable)
   },
   {
     id: "smartmed-ai",
@@ -72,6 +78,8 @@ const projects = [
     category: "Computer Vision",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
     techStack: ["YOLO", "OpenCV", "Python", "FastAPI", "Google Colab", "AWS"]
+    // TODO: Add githubUrl: "https://github.com/yourusername/project-repo"
+    // TODO: Add liveUrl: "https://your-project-demo.com" (if applicable)
   }
 ];
 
@@ -191,6 +199,7 @@ export default function Home() {
               >
                 Skills
               </Button>
+              {/* TODO: UPDATE RESUME PDF PATH - currently set to '/Chetan_Chhetri_Resume.pdf' */}
               <Button 
                 variant="ghost" 
                 className="rounded-full hover-elevate" 
@@ -208,38 +217,50 @@ export default function Home() {
       <section id="about" className="relative min-h-screen flex items-center overflow-hidden">
         <AnimatedBackground />
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 w-full relative z-10">
-          <div className="space-y-12 text-center max-w-4xl mx-auto">
-            <div className="space-y-6 animate-fade-in">
-              <h1 className="text-6xl lg:text-7xl font-bold tracking-tight">
-                <span className="bg-gradient-to-r from-blue-500 via-primary to-yellow-500 bg-clip-text text-transparent animate-gradient">
-                  AI/ML Engineer
-                </span>
-                <br />
-                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  Full Stack Developer
-                </span>
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Computer Engineering graduate specializing in AI/ML, RAG systems, computer vision, and cloud deployment. 
-                Experienced in LangChain, TensorFlow, YOLO, and AWS.
-              </p>
+          <div className="space-y-12 text-center max-w-5xl mx-auto">
+            <div className="space-y-8 animate-fade-in">
+              <div className="space-y-4">
+                <p className="text-lg text-muted-foreground font-medium tracking-wide uppercase">
+                  Welcome to my portfolio
+                </p>
+                <h1 className="text-7xl lg:text-8xl xl:text-9xl font-black tracking-tight leading-none">
+                  <span className="block bg-gradient-to-r from-blue-500 via-purple-500 to-yellow-500 bg-clip-text text-transparent animate-gradient">
+                    CHETAN
+                  </span>
+                  <span className="block bg-gradient-to-r from-yellow-500 via-primary to-blue-500 bg-clip-text text-transparent animate-gradient" style={{ animationDelay: '0.5s' }}>
+                    CHHETRI
+                  </span>
+                </h1>
+              </div>
+              <div className="space-y-3">
+                <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
+                  AI/ML Engineer & Full Stack Developer
+                </h2>
+                <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                  Computer Engineering graduate specializing in AI/ML, RAG systems, computer vision, and cloud deployment. 
+                  Experienced in LangChain, TensorFlow, YOLO, and AWS.
+                </p>
+              </div>
             </div>
             <div className="flex flex-wrap justify-center gap-4">
               <Button size="lg" className="gap-2 hover:scale-105 transition-transform" onClick={() => scrollToSection('projects')} data-testid="button-view-projects">
                 View Projects
                 <ArrowRight className="h-4 w-4" />
               </Button>
-              <Button size="lg" variant="outline" className="gap-2 hover:scale-105 transition-transform" data-testid="button-contact">
+              <Button size="lg" variant="outline" className="gap-2 hover:scale-105 transition-transform" onClick={() => scrollToSection('connect')} data-testid="button-contact">
                 <Mail className="h-4 w-4" />
                 Contact Me
               </Button>
             </div>
+            {/* TODO: UPDATE GITHUB AND LINKEDIN LINKS BELOW */}
             <div className="flex justify-center items-center gap-4">
+              {/* TODO: Change GitHub username - currently set to 'Chetan-chhetri' */}
               <a href="https://github.com/Chetan-chhetri" target="_blank" rel="noopener noreferrer" data-testid="link-github">
                 <Button variant="ghost" size="icon" className="hover:scale-110 transition-transform">
                   <Github className="h-5 w-5" />
                 </Button>
               </a>
+              {/* TODO: Change LinkedIn username - currently set to 'chetanchhetri' */}
               <a href="https://linkedin.com/in/chetanchhetri" target="_blank" rel="noopener noreferrer" data-testid="link-linkedin">
                 <Button variant="ghost" size="icon" className="hover:scale-110 transition-transform">
                   <Linkedin className="h-5 w-5" />
@@ -385,7 +406,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-32 relative z-10">
+      {/* TODO: UPDATE CONTACT LINKS BELOW - GitHub and LinkedIn */}
+      <section id="connect" className="py-20 lg:py-32 relative z-10">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <div className="space-y-8">
             <div className="space-y-4">
@@ -416,6 +438,7 @@ export default function Home() {
                 </div>
               </Card>
 
+              {/* TODO: Change GitHub username below - currently set to 'Chetan-chhetri' */}
               <Card className="p-8 hover-elevate transition-all hover:scale-105" data-testid="card-contact-github">
                 <div className="space-y-4">
                   <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/20 to-primary/20 flex items-center justify-center">
@@ -436,6 +459,7 @@ export default function Home() {
                 </div>
               </Card>
 
+              {/* TODO: Change LinkedIn username below - currently set to 'chetanchhetri' */}
               <Card className="p-8 hover-elevate transition-all hover:scale-105" data-testid="card-contact-linkedin">
                 <div className="space-y-4">
                   <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-yellow-500/20 to-accent/20 flex items-center justify-center">
