@@ -169,9 +169,9 @@ export default function Home() {
       <header className="sticky top-0 z-50 border-b border-border backdrop-blur-xl bg-background/80">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div className="font-bold text-xl tracking-tight">
+            <div className="font-bold text-2xl tracking-tight">
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Chetan Chhetri
+                CC
               </span>
             </div>
             <nav className="hidden md:flex items-center gap-2">
