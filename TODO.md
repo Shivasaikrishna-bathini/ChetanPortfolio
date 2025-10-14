@@ -48,7 +48,7 @@ Also update in footer (around line 365):
 - `/client/src/pages/ProjectDetail.tsx` - Detailed project pages
 
 ### Homepage Project Cards
-Edit the `projects` array (around line 25):
+Edit the `projects` array (around line 53):
 ```javascript
 const projects = [
   {
@@ -76,6 +76,85 @@ Edit the `projectData` object in `/client/src/pages/ProjectDetail.tsx` (around l
   architecture: "Architecture details",
   results: "Results achieved"
 }
+```
+
+## 🔗 Adding Project Links (GitHub & Website URLs)
+
+### Step 1: Update Project Data in Home.tsx
+**File:** `/client/src/pages/Home.tsx`
+
+Find the `projects` array (around line 53) and uncomment/add the URL fields:
+
+```javascript
+{
+  id: "motion-detector",
+  title: "Motion Detector – Agentic AI System",
+  description: "...",
+  category: "AI/ML",
+  image: "...",
+  techStack: ["PyTorch", "DVRL", ...],
+  // TODO: Add githubUrl: "https://github.com/yourusername/project-repo"
+  // TODO: Add websiteUrl: "https://your-project-demo.com" (if applicable)
+}
+```
+
+**Change to:**
+```javascript
+{
+  id: "motion-detector",
+  title: "Motion Detector – Agentic AI System",
+  description: "...",
+  category: "AI/ML",
+  image: "...",
+  techStack: ["PyTorch", "DVRL", ...],
+  githubUrl: "https://github.com/YOUR_USERNAME/motion-detector",
+  websiteUrl: "https://motion-detector-demo.com"  // Optional
+}
+```
+
+### Step 2: Uncomment ProjectCard Interface Props
+**File:** `/client/src/components/ProjectCard.tsx`
+
+Around line 12, uncomment:
+```typescript
+interface ProjectCardProps {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  image: string;
+  techStack: string[];
+  githubUrl?: string;  // UNCOMMENT THIS
+  websiteUrl?: string;  // UNCOMMENT THIS
+}
+```
+
+### Step 3: Update Component Props Destructuring
+In same file (around line 17):
+```typescript
+export function ProjectCard({ 
+  id, title, description, category, image, techStack, 
+  githubUrl, websiteUrl  // ADD THESE
+}: ProjectCardProps) {
+```
+
+### Step 4: Uncomment the Link Buttons
+Around line 132, remove comment markers `{/*` and `*/}`:
+```typescript
+<div className="flex gap-2 pt-2">
+  {githubUrl && (
+    <Button size="sm" variant="outline" ...>
+      <Github className="w-4 h-4 mr-2" />
+      Source Code
+    </Button>
+  )}
+  {websiteUrl && (
+    <Button size="sm" variant="outline" ...>
+      <ExternalLink className="w-4 h-4 mr-2" />
+      Live Demo
+    </Button>
+  )}
+</div>
 ```
 
 ## 🖼️ Updating Project Images

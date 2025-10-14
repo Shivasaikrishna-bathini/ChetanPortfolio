@@ -1,5 +1,7 @@
 import { useState, useRef } from "react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ExternalLink, Github } from "lucide-react";
 
 interface ProjectCardProps {
   id: string;
@@ -8,6 +10,9 @@ interface ProjectCardProps {
   category: string;
   image: string;
   techStack: string[];
+  // TODO: Uncomment these when you have the links ready
+  // githubUrl?: string;
+  // websiteUrl?: string;
 }
 
 export function ProjectCard({ id, title, description, category, image, techStack }: ProjectCardProps) {
@@ -120,6 +125,42 @@ export function ProjectCard({ id, title, description, category, image, techStack
             </Badge>
           ))}
         </div>
+
+        {/* TODO: Add your project links here - Uncomment and add URLs when ready */}
+        {/* 
+        <div className="flex gap-2 pt-2">
+          {githubUrl && (
+            <Button
+              size="sm"
+              variant="outline"
+              className="backdrop-blur-sm bg-white/5 border-white/10 hover:bg-white/10"
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open(githubUrl, '_blank');
+              }}
+              data-testid={`button-github-${id}`}
+            >
+              <Github className="w-4 h-4 mr-2" />
+              Source Code
+            </Button>
+          )}
+          {websiteUrl && (
+            <Button
+              size="sm"
+              variant="outline"
+              className="backdrop-blur-sm bg-white/5 border-white/10 hover:bg-white/10"
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open(websiteUrl, '_blank');
+              }}
+              data-testid={`button-website-${id}`}
+            >
+              <ExternalLink className="w-4 h-4 mr-2" />
+              Live Demo
+            </Button>
+          )}
+        </div>
+        */}
       </div>
 
       {/* Dynamic shadow simulation */}
