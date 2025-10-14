@@ -213,14 +213,25 @@ export default function ProjectDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-50 border-b border-border backdrop-blur-xl bg-background/80">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Animated prismatic background */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-cyan-500 to-purple-500 rounded-full blur-3xl animate-pulse-glow" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-br from-pink-500 to-yellow-500 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-green-500 to-blue-500 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '2s' }} />
+      </div>
+
+      <header className="sticky top-0 z-50 border-b border-white/10 backdrop-blur-xl bg-background/60">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link href="/">
-              <Button variant="ghost" className="gap-2" data-testid="button-back">
+              <Button 
+                variant="ghost" 
+                className="gap-2 backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 hover:scale-105" 
+                data-testid="button-back"
+              >
                 <ArrowLeft className="h-4 w-4" />
-                Back
+                <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent font-semibold">Back</span>
               </Button>
             </Link>
             <ThemeToggle />
@@ -229,12 +240,15 @@ export default function ProjectDetail() {
       </header>
 
       <div className="relative h-96 overflow-hidden">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-cyan-500/20 to-pink-500/20" />
+        <div className="absolute inset-0 backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
+        
+        {/* Holographic overlay */}
+        <div className="absolute inset-0 opacity-30 mix-blend-overlay">
+          <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-br from-cyan-400 to-transparent animate-pulse-glow" />
+          <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-tr from-purple-400 to-transparent animate-pulse-glow" style={{ animationDelay: '1.5s' }} />
+        </div>
       </div>
 
       <div className="max-w-6xl mx-auto px-6 lg:px-8 -mt-32 relative z-10">
@@ -251,18 +265,24 @@ export default function ProjectDetail() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <Card className="p-6" data-testid="card-problem">
-              <h3 className="font-semibold text-lg mb-3">Problem</h3>
-              <p className="text-sm text-muted-foreground">{project.problem}</p>
-            </Card>
-            <Card className="p-6" data-testid="card-approach">
-              <h3 className="font-semibold text-lg mb-3">Approach</h3>
-              <p className="text-sm text-muted-foreground">{project.approach}</p>
-            </Card>
-            <Card className="p-6" data-testid="card-results">
-              <h3 className="font-semibold text-lg mb-3">Results</h3>
-              <p className="text-sm text-muted-foreground">{project.results}</p>
-            </Card>
+            <div className="group relative rounded-2xl overflow-hidden backdrop-blur-xl bg-white/5 border border-white/10 p-6 transition-all duration-500 hover:scale-[1.02]" data-testid="card-problem">
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-cyan-500/20 to-purple-500/20" />
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-[inset_0_0_60px_rgba(0,255,255,0.1)]" />
+              <h3 className="font-semibold text-lg mb-3 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent relative z-10">Problem</h3>
+              <p className="text-sm text-muted-foreground relative z-10">{project.problem}</p>
+            </div>
+            <div className="group relative rounded-2xl overflow-hidden backdrop-blur-xl bg-white/5 border border-white/10 p-6 transition-all duration-500 hover:scale-[1.02]" data-testid="card-approach">
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-purple-500/20 to-pink-500/20" />
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-[inset_0_0_60px_rgba(255,0,255,0.1)]" />
+              <h3 className="font-semibold text-lg mb-3 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent relative z-10">Approach</h3>
+              <p className="text-sm text-muted-foreground relative z-10">{project.approach}</p>
+            </div>
+            <div className="group relative rounded-2xl overflow-hidden backdrop-blur-xl bg-white/5 border border-white/10 p-6 transition-all duration-500 hover:scale-[1.02]" data-testid="card-results">
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-pink-500/20 to-yellow-500/20" />
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-[inset_0_0_60px_rgba(255,255,0,0.1)]" />
+              <h3 className="font-semibold text-lg mb-3 bg-gradient-to-r from-pink-400 to-yellow-400 bg-clip-text text-transparent relative z-10">Results</h3>
+              <p className="text-sm text-muted-foreground relative z-10">{project.results}</p>
+            </div>
           </div>
 
           <div className="space-y-6">

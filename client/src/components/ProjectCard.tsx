@@ -1,5 +1,6 @@
 import { Link } from "wouter";
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
+import { Badge } from "@/components/ui/badge";
 
 interface ProjectCardProps {
   id: string;
@@ -11,69 +12,134 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ id, title, description, category, image, techStack }: ProjectCardProps) {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
-  const [showContent, setShowContent] = useState(false);
-  const [lineIndex, setLineIndex] = useState(0);
+  const cardRef = useRef<HTMLDivElement>(null);
 
-  const projectNumber = id.split('-').map((_, i) => i).reduce((a, b) => a + b, 0).toString().padStart(3, '0');
-  
-  const lines = [
-    `> run ${title.toLowerCase().replace(/\s+/g, '_')}.py`,
-    `Loading model... ████████ 100%`,
-    `Status: Production Ready`,
-    `Tech: [${techStack.slice(0, 3).join('] [')}]`,
-    `$ view_details --verbose`
-  ];
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setMousePosition({ x, y });
+  };
 
-  useEffect(() => {
-    setShowContent(true);
-  }, []);
-
-  useEffect(() => {
-    if (showContent && lineIndex < lines.length) {
-      const timer = setTimeout(() => {
-        setLineIndex(lineIndex + 1);
-      }, 150);
-      return () => clearTimeout(timer);
-    }
-  }, [showContent, lineIndex, lines.length]);
-
-  const handleClick = () => {
-    setIsClicked(true);
-    setTimeout(() => setIsClicked(false), 600);
+  const getGradientAngle = () => {
+    const centerX = 50;
+    const centerY = 50;
+    const angle = Math.atan2(mousePosition.y - centerY, mousePosition.x - centerX) * (180 / Math.PI);
+    return angle;
   };
 
   return (
-    <Link href={`/project/${id}`} onClick={handleClick}>
-      <div 
-        className="group relative font-mono text-sm border-2 border-green-500/30 bg-black/90 p-6 transition-all duration-300 hover:border-green-500/60 hover:shadow-[0_0_20px_rgba(34,197,94,0.3)] cursor-pointer"
+    <Link href={`/project/${id}`}>
+      <div
+        ref={cardRef}
+        className="group relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-500 hover:scale-[1.02]"
+        onMouseMove={handleMouseMove}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         data-testid={`card-project-${id}`}
+        style={{
+          background: 'rgba(255, 255, 255, 0.03)',
+          backdropFilter: 'blur(20px)',
+          border: '2px solid transparent',
+          backgroundImage: isHovered 
+            ? `linear-gradient(${getGradientAngle()}deg, rgba(255, 0, 255, 0.3), rgba(0, 255, 255, 0.3), rgba(255, 255, 0, 0.3), rgba(255, 0, 255, 0.3))`
+            : 'linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))',
+          backgroundClip: 'padding-box, border-box',
+          backgroundOrigin: 'padding-box, border-box'
+        }}
       >
-        <div className="text-green-500/80 mb-4 flex items-center justify-between">
-          <span>┌─ [PROJECT_{projectNumber}] ────────────────┐</span>
-        </div>
-        
-        <div className="space-y-2 min-h-[140px]">
-          {lines.slice(0, lineIndex).map((line, i) => (
-            <div key={i} className={`text-green-400 ${isClicked && i === lines.length - 1 ? 'animate-pulse' : ''}`}>
-              │ {line}
-              {i === lineIndex - 1 && isHovered && (
-                <span className="inline-block w-2 h-4 bg-green-400 ml-1 animate-pulse" />
-              )}
-            </div>
-          ))}
+        {/* Rainbow gradient border */}
+        <div 
+          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{
+            background: `linear-gradient(${getGradientAngle()}deg, #ff00ff, #00ffff, #ffff00, #ff00ff)`,
+            padding: '2px',
+            WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+            WebkitMaskComposite: 'xor',
+            maskComposite: 'exclude'
+          }}
+        />
+
+        {/* Holographic reflection */}
+        <div
+          className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none"
+          style={{
+            background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(255, 255, 255, 0.8) 0%, transparent 50%)`,
+            mixBlendMode: 'overlay'
+          }}
+        />
+
+        {/* Prismatic overlay */}
+        <div 
+          className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none"
+          style={{
+            background: `linear-gradient(${getGradientAngle() + 45}deg, 
+              rgba(255, 0, 128, 0.3) 0%, 
+              rgba(128, 0, 255, 0.3) 25%, 
+              rgba(0, 128, 255, 0.3) 50%, 
+              rgba(0, 255, 128, 0.3) 75%, 
+              rgba(255, 255, 0, 0.3) 100%)`,
+          }}
+        />
+
+        {/* Inner glow */}
+        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+          <div className="absolute inset-0 rounded-2xl shadow-[inset_0_0_60px_rgba(255,255,255,0.1)]" />
         </div>
 
-        <div className="text-green-500/80 mt-4">
-          <span>└────────────────────────────────┘</span>
+        {/* Content */}
+        <div className="relative z-10 p-6 space-y-4">
+          <div className="flex items-center justify-between">
+            <Badge 
+              variant="outline" 
+              className="text-xs backdrop-blur-sm bg-white/10 border-white/20"
+              data-testid={`badge-category-${id}`}
+            >
+              {category}
+            </Badge>
+          </div>
+          
+          <div className="space-y-2">
+            <h3 className="text-xl font-semibold tracking-tight text-foreground" data-testid={`text-title-${id}`}>
+              {title}
+            </h3>
+            <p className="text-sm text-muted-foreground line-clamp-2" data-testid={`text-description-${id}`}>
+              {description}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {techStack.slice(0, 4).map((tech) => (
+              <Badge 
+                key={tech} 
+                variant="secondary" 
+                className="text-xs backdrop-blur-sm bg-white/5 border border-white/10"
+              >
+                {tech}
+              </Badge>
+            ))}
+          </div>
+
+          <div className="flex items-center text-sm text-primary font-medium pt-2 group-hover:translate-x-2 transition-transform duration-300">
+            <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              Explore Project →
+            </span>
+          </div>
         </div>
 
-        {isClicked && (
-          <div className="absolute inset-0 bg-green-500/10 pointer-events-none animate-pulse" />
-        )}
+        {/* Dynamic shadow simulation */}
+        <div 
+          className="absolute -inset-4 -z-10 opacity-0 group-hover:opacity-60 transition-opacity duration-500 blur-2xl"
+          style={{
+            background: `radial-gradient(circle at ${100 - mousePosition.x}% ${100 - mousePosition.y}%, 
+              rgba(139, 92, 246, 0.4), 
+              rgba(59, 130, 246, 0.3), 
+              transparent 70%)`
+          }}
+        />
       </div>
     </Link>
   );
