@@ -6,7 +6,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { CursorEffect } from "@/components/CursorEffect";
 import Home from "@/pages/Home";
-import ProjectDetail from "@/pages/ProjectDetail";
 import StyleGuide from "@/pages/StyleGuide";
 import NotFound from "@/pages/not-found";
 
@@ -14,7 +13,6 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/project/:id" component={ProjectDetail} />
       <Route path="/style-guide" component={StyleGuide} />
       <Route component={NotFound} />
     </Switch>
