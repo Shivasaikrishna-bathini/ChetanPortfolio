@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+import { NeuralNetwork } from "./NeuralNetwork";
 
 interface ProjectCardProps {
   id: string;
@@ -16,11 +17,12 @@ export function ProjectCard({ id, title, description, category, image, techStack
   return (
     <Link href={`/project/${id}`}>
       <Card className="group overflow-hidden hover-elevate active-elevate-2 transition-all duration-300 cursor-pointer" data-testid={`card-project-${id}`}>
-        <div className="aspect-video overflow-hidden bg-muted">
+        <div className="aspect-video overflow-hidden bg-muted relative">
+          <NeuralNetwork />
           <img
             src={image}
             alt={title}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 relative z-10"
           />
         </div>
         <div className="p-6 space-y-4">
