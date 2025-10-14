@@ -54,30 +54,50 @@ const projects = [
   {
     id: "motion-detector",
     title: "Motion Detector – Agentic AI System",
-    description: "AI system leveraging Bongard-HOI model to detect human-object interactions in videos and images. Integrated DeepSeek R1 for reasoning and LangChain agents.",
+    description: "Engineered deep learning models to detect human-object interactions using Bongard-HOI dataset. Raised model accuracy from 55% to 80% through DVRL, attention mechanisms, and self-supervised learning.",
     category: "AI/ML",
     image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=800&q=80",
-    techStack: ["LangChain", "RAG", "FastAPI", "ChromaDB", "PyTorch", "HuggingFace", "OpenAI"]
+    techStack: ["PyTorch", "DVRL", "Self-Supervised Learning", "Computer Vision", "Deep Learning"]
     // TODO: Add githubUrl: "https://github.com/yourusername/project-repo"
     // TODO: Add liveUrl: "https://your-project-demo.com" (if applicable)
   },
   {
     id: "personal-attorney",
     title: "Personal Attorney – Legal RAG Assistant",
-    description: "LLM-based RAG System for personalized legal guidance. Vectorized user data and regulations using ChromaDB, served through FastAPI.",
+    description: "Architected Legal RAG assistant using ChromaDB, LangChain, and DeepSeek 8B. Deployed scalable REST APIs on AWS, reduced retraining costs by 70%, maintained 98% retrieval accuracy with 1,500+ monthly queries.",
     category: "AI/ML",
     image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80",
-    techStack: ["LangChain", "FastAPI", "REST API", "ChromaDB", "DeepSeek", "AWS"]
+    techStack: ["LangChain", "ChromaDB", "DeepSeek", "FastAPI", "AWS", "MLOps"]
     // TODO: Add githubUrl: "https://github.com/yourusername/project-repo"
     // TODO: Add liveUrl: "https://your-project-demo.com" (if applicable)
   },
   {
     id: "smartmed-ai",
     title: "SmartMed AI – Pill Detection App",
-    description: "YOLO-based real-time medicine classification tool. Developed pill counting application for pharmacies with real-time video stream detection.",
+    description: "Developed pill detection application using YOLO (v5-v12), ResNet, and attention modules. Raised detection accuracy from 76% to 91%, processing 10,000+ images monthly. Containerized deployment with Docker and AWS.",
     category: "Computer Vision",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
-    techStack: ["YOLO", "OpenCV", "Python", "FastAPI", "Google Colab", "AWS"]
+    techStack: ["YOLO", "ResNet", "OpenCV", "Docker", "FastAPI", "AWS", "GradCAM"]
+    // TODO: Add githubUrl: "https://github.com/yourusername/project-repo"
+    // TODO: Add liveUrl: "https://your-project-demo.com" (if applicable)
+  },
+  {
+    id: "sanskrit-transformer",
+    title: "Sanskrit Transformer",
+    description: "Built and trained Transformer-based NLP model with 25,000-token vocabulary on ancient Sanskrit Vedic texts. Reduced inference latency by 46% and boosted throughput by 39% using NVIDIA GPUs, CUDA, and TensorRT.",
+    category: "NLP",
+    image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80",
+    techStack: ["Transformers", "TensorRT", "CUDA", "cuDNN", "NLP", "Performance Optimization"]
+    // TODO: Add githubUrl: "https://github.com/yourusername/project-repo"
+    // TODO: Add liveUrl: "https://your-project-demo.com" (if applicable)
+  },
+  {
+    id: "time-series-forecasting",
+    title: "Time Series Forecasting",
+    description: "Designed time-series forecasting solutions for volatile financial data. Built ARIMA, Meta Prophet, and XGBoost ensemble models, enhancing accuracy from 68% to 84% and reducing error by 31% during market swings.",
+    category: "Machine Learning",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+    techStack: ["ARIMA", "Prophet", "XGBoost", "MLflow", "Feature Engineering", "Financial Data"]
     // TODO: Add githubUrl: "https://github.com/yourusername/project-repo"
     // TODO: Add liveUrl: "https://your-project-demo.com" (if applicable)
   }
