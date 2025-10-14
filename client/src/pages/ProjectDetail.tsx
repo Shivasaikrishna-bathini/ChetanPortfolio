@@ -79,11 +79,11 @@ async def get_legal_advice(query: str, jurisdiction: str):
     subtitle: "YOLO-based Real-Time Medicine Classification Tool",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
     category: "Computer Vision",
-    techStack: ["YOLO", "OpenCV", "Python", "FastAPI", "Google Colab", "AWS"],
+    techStack: ["YOLO", "ResNet", "OpenCV", "Docker", "FastAPI", "AWS", "GradCAM"],
     problem: "Manual pill counting in pharmacies is error-prone and time-consuming. Pharmacies need an automated solution for accurate medicine identification and counting.",
-    approach: "Developed a pill counting application leveraging YOLO for real-time video stream detection. Trained the model on the Kaggle pill dataset and deployed on AWS EC2/S3, with initial prototyping in Google Colab.",
-    architecture: "The system uses YOLOv8 for object detection, OpenCV for video processing, and FastAPI for the backend service. Models are stored in AWS S3, and inference runs on EC2 instances with GPU support.",
-    results: "Achieved 96% accuracy in pill detection and counting. Reduced pharmacy counting time by 75% and virtually eliminated counting errors. System processes 60 frames per second in real-time.",
+    approach: "Developed a pill counting application leveraging YOLO (v5-v12), ResNet, and attention modules for real-time video stream detection. Implemented multi-scale object detection and tracking algorithms with explainability tools like GradCAM.",
+    architecture: "The system uses YOLO for object detection, ResNet for classification, OpenCV for video processing, and FastAPI for the backend service. Models are containerized with Docker and deployed on AWS with GPU support. Attention modules enhance detection accuracy.",
+    results: "Raised detection accuracy from 76% to 91%, processing 10,000+ images monthly. Reduced pharmacy counting time by 75% and improved operational reliability by 25%. System processes 60 frames per second in real-time.",
     demoUrl: "https://codesandbox.io/s/smartmed-demo",
     figmaUrl: "https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/example",
     code: `import cv2
@@ -91,7 +91,7 @@ from ultralytics import YOLO
 import numpy as np
 
 # Load YOLO model
-model = YOLO('pill_detection_v8.pt')
+model = YOLO('pill_detection_v12.pt')
 
 # Process video stream
 cap = cv2.VideoCapture(0)
@@ -110,6 +110,88 @@ while True:
                 1, (0, 255, 0), 2)
     
     cv2.imshow('SmartMed', annotated)`
+  },
+  "sanskrit-transformer": {
+    title: "Sanskrit Transformer",
+    subtitle: "Optimized NLP Model for Ancient Sanskrit Vedic Texts",
+    image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80",
+    category: "NLP",
+    techStack: ["Transformers", "TensorRT", "CUDA", "cuDNN", "NLP", "Performance Optimization"],
+    problem: "Processing ancient Sanskrit texts requires specialized NLP models with high performance and low latency. Traditional models struggle with the complex grammatical structure and limited vocabulary of Vedic Sanskrit.",
+    approach: "Built and trained a custom Transformer-based NLP model with a 25,000-token vocabulary specifically designed for ancient Sanskrit Vedic texts. Leveraged NVIDIA GPUs, CUDA, cuDNN, and TensorRT for kernel-level optimizations to achieve production-grade performance.",
+    architecture: "The architecture employs a custom Transformer model with specialized tokenization for Sanskrit. Model inference is optimized using TensorRT for GPU acceleration, with CUDA and cuDNN for matrix operations. Performance profiling ensures sub-75ms inference times.",
+    results: "Reduced inference latency by 46% and boosted throughput by 39% through kernel-level optimization. Achieved sub-75ms inference times suitable for real-time applications. Successfully deployed production-grade pipeline for large-scale language processing.",
+    demoUrl: "https://codesandbox.io/s/sanskrit-transformer-demo",
+    figmaUrl: "https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/example",
+    code: `import torch
+from transformers import AutoTokenizer, AutoModel
+import tensorrt as trt
+
+# Load custom Sanskrit tokenizer
+tokenizer = AutoTokenizer.from_pretrained(
+    'sanskrit_vocab_25k'
+)
+
+# Load optimized model
+model = AutoModel.from_pretrained(
+    'sanskrit_transformer'
+)
+
+# TensorRT optimization
+trt_model = trt.optimize(
+    model,
+    precision='fp16',
+    max_batch_size=32
+)
+
+# Inference
+text = "वेदानां सामवेदोऽस्मि"
+inputs = tokenizer(text, return_tensors='pt')
+outputs = trt_model(**inputs)
+
+print(f"Inference time: {outputs.latency}ms")`
+  },
+  "time-series-forecasting": {
+    title: "Time Series Forecasting",
+    subtitle: "Advanced Financial Data Prediction System",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+    category: "Machine Learning",
+    techStack: ["ARIMA", "Prophet", "XGBoost", "MLflow", "Feature Engineering", "Financial Data"],
+    problem: "Financial markets are highly volatile and unpredictable. Traditional forecasting methods fail during market swings, leading to poor investment decisions and significant financial losses.",
+    approach: "Designed comprehensive time-series forecasting solutions combining ARIMA for trend analysis, Meta Prophet for seasonality, and XGBoost ensemble models for complex pattern recognition. Implemented automated feature engineering and reliability analysis using prediction intervals.",
+    architecture: "The system employs a three-model ensemble: (1) ARIMA for baseline trends, (2) Meta Prophet for seasonal patterns, and (3) XGBoost for non-linear relationships. MLflow tracks experiments and deployments. Feature engineering pipeline processes 100,000+ monthly data points.",
+    results: "Enhanced accuracy from 68% to 84% and reduced error by 31% during volatile market conditions. Successfully processed and analyzed 100,000+ monthly data points. Scalable deployment with MLflow enables rapid model iteration and A/B testing.",
+    demoUrl: "https://codesandbox.io/s/timeseries-forecast-demo",
+    figmaUrl: "https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/example",
+    code: `import pandas as pd
+from prophet import Prophet
+from xgboost import XGBRegressor
+from statsmodels.tsa.arima.model import ARIMA
+import mlflow
+
+# Load financial data
+df = pd.read_csv('market_data.csv')
+
+# ARIMA baseline
+arima = ARIMA(df['price'], order=(5,1,0))
+arima_model = arima.fit()
+
+# Prophet for seasonality
+prophet = Prophet()
+prophet.fit(df[['ds', 'y']])
+
+# XGBoost ensemble
+xgb = XGBRegressor(n_estimators=100)
+xgb.fit(X_train, y_train)
+
+# MLflow tracking
+with mlflow.start_run():
+    mlflow.log_metric("accuracy", 0.84)
+    mlflow.log_metric("error_reduction", 0.31)
+    
+predictions = ensemble_predict(arima_model, 
+                               prophet, xgb, 
+                               test_data)`
   }
 };
 
