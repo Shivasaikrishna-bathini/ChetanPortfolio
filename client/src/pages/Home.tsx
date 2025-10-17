@@ -284,7 +284,7 @@ export default function Home() {
                 </Button>
               </a>
               {/* TODO: Change LinkedIn username - currently set to 'chetanchhetri' */}
-              <a href="https://linkedin.com/in/chetanchhetri" target="_blank" rel="noopener noreferrer" data-testid="link-linkedin">
+              <a href="https://www.linkedin.com/in/chetan-chhetri-417680275/" target="_blank" rel="noopener noreferrer" data-testid="link-linkedin">
                 <Button variant="ghost" size="icon" className="hover:scale-110 transition-transform">
                   <Linkedin className="h-5 w-5" />
                 </Button>
@@ -487,13 +487,13 @@ export default function Home() {
                   <div>
                     <h3 className="font-semibold text-lg mb-2">LinkedIn</h3>
                     <a 
-                      href="https://linkedin.com/in/chetanchhetri" 
+                      href="https://www.linkedin.com/in/chetan-chhetri-417680275/" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="text-sm text-muted-foreground hover:text-primary transition-colors"
                       data-testid="link-linkedin"
                     >
-                      Chetan Chhetri
+                      chetan-chhetri
                     </a>
                   </div>
                 </div>
