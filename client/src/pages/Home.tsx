@@ -189,15 +189,24 @@ export default function Home() {
       <header className="sticky top-0 z-50 border-b border-border backdrop-blur-xl bg-background/80">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div className="font-bold text-2xl tracking-tight">
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                CC
-              </span>
-            </div>
-            <nav className="hidden md:flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-full hover-elevate"
+              onClick={() => scrollToSection('about')}
+              data-testid="button-nav-home"
+            >
+              <div className="font-bold text-2xl tracking-tight">
+                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  CC
+                </span>
+              </div>
+            </Button>
+            
+            <nav className="flex items-center gap-1">
               <Button 
                 variant="ghost" 
-                className="rounded-full hover-elevate" 
+                className="rounded-full hover-elevate text-sm sm:text-base px-3 sm:px-4" 
                 onClick={() => scrollToSection('about')}
                 data-testid="button-nav-about"
               >
@@ -205,7 +214,7 @@ export default function Home() {
               </Button>
               <Button 
                 variant="ghost" 
-                className="rounded-full hover-elevate" 
+                className="rounded-full hover-elevate text-sm sm:text-base px-3 sm:px-4" 
                 onClick={() => scrollToSection('projects')}
                 data-testid="button-nav-projects"
               >
@@ -213,7 +222,7 @@ export default function Home() {
               </Button>
               <Button 
                 variant="ghost" 
-                className="rounded-full hover-elevate" 
+                className="rounded-full hover-elevate text-sm sm:text-base px-3 sm:px-4" 
                 onClick={() => scrollToSection('skills')}
                 data-testid="button-nav-skills"
               >
@@ -222,7 +231,7 @@ export default function Home() {
               {/* TODO: UPDATE RESUME PDF PATH - currently set to '/Chetan_Chhetri_Resume.pdf' */}
               <Button 
                 variant="ghost" 
-                className="rounded-full hover-elevate" 
+                className="rounded-full hover-elevate text-sm sm:text-base px-3 sm:px-4" 
                 onClick={() => window.open('/Chetan_Chhetri_Resume.pdf', '_blank')}
                 data-testid="button-nav-resume"
               >
